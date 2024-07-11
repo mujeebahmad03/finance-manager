@@ -9,19 +9,18 @@ import {
   SheetTitle,
 } from "@/components/ui/sheet";
 
-import { AccountForm } from "./account-form";
 import { insertAccountSchema } from "@/db/schema";
 import { useEditAccount } from "@/features/accounts/api/use-edit-account";
 import { useDeleteAccount } from "@/features/accounts/api/use-delete-account";
 import { useGetAccount } from "@/features/accounts/api/use-get-account";
-import { useOpenAccount } from "@/features/accounts/hooks/use-open-accounts";
+import { useOpenAccount } from "@/features/accounts/hooks/use-open-account";
 import { useConfirm } from "@/hooks/use-confirm";
 
 const formSchema = insertAccountSchema.pick({ name: true });
 
 type FormValues = z.input<typeof formSchema>;
 
-export const EditAccountSheet = () => {
+export const EditTransactionSheet = () => {
   const { isOpen, onClose, id } = useOpenAccount();
   const [ConfirmDialog, confirm] = useConfirm(
     "Are you sure?",
@@ -74,13 +73,14 @@ export const EditAccountSheet = () => {
               <Loader2 className="animate-spin text-muted-foreground" />
             </div>
           ) : (
-            <AccountForm
-              id={id}
-              defaultValues={defaultValues}
-              onSubmit={onSubmit}
-              disabled={isPending}
-              onDelete={onDelete}
-            />
+            // <AccountForm
+            //   id={id}
+            //   defaultValues={defaultValues}
+            //   onSubmit={onSubmit}
+            //   disabled={isPending}
+            //   onDelete={onDelete}
+            // />
+            <p>TODO: Transaction form</p>
           )}
         </SheetContent>
       </Sheet>
