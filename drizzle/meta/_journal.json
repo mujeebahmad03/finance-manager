@@ -15,6 +15,13 @@
       "when": 1718238800476,
       "tag": "0001_nosy_shocker",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1720702650090,
+      "tag": "0002_even_proudstar",
+      "breakpoints": true
     }
   ]
 }
