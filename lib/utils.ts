@@ -12,3 +12,11 @@ export const convertAmountFromMillUnits = (amount: number) => {
 export const convertAmountToMilliUnits = (amount: number) => {
   return Math.round(amount * 100);
 };
+
+export const formatCurrency = (amount: number) => {
+  return new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+    minimumFractionDigits: 2,
+  }).format(amount);
+};

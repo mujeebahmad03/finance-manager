@@ -22,6 +22,8 @@ export const DatePicker = ({ disabled, onChange, value }: Props) => {
     <Popover>
       <PopoverTrigger asChild>
         <Button
+          disabled={disabled}
+          variant="outline"
           className={cn(
             "w-full justify-start text-left font-normal",
             !value && "text-muted-foreground"
@@ -37,7 +39,6 @@ export const DatePicker = ({ disabled, onChange, value }: Props) => {
           selected={value}
           onSelect={onChange}
           disabled={disabled}
-          defaultMonth={value}
           initialFocus
         />
       </PopoverContent>

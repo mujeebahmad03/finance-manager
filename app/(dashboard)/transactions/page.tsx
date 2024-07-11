@@ -2,8 +2,8 @@
 
 import { Loader2, Plus } from "lucide-react";
 
-import { useGetAccounts } from "@/features/accounts/api/use-get-accounts";
-import { useBulkDeleteAccounts } from "@/features/accounts/api/use-bulk-delete-accounts";
+import { useGetTransactions } from "@/features/transactions/api/use-get-transactions";
+import { useBulkDeleteTransactions } from "@/features/transactions/api/use-bulk-delete-transactions";
 import { useNewTransaction } from "@/features/transactions/hooks/use-new-transaction";
 
 import { Button } from "@/components/ui/button";
@@ -15,15 +15,14 @@ import { Skeleton } from "@/components/ui/skeleton";
 
 const TransactionsPage = () => {
   const { onOpen } = useNewTransaction();
+  const transactionsQuery = useGetTransactions();
+  const deleteTransactions = useBulkDeleteTransactions();
+  const transactions = transactionsQuery.data || [];
 
-  const accountsQuery = useGetAccounts();
-  const accounts = accountsQuery.data || [];
+  const isDisabled =
+    transactionsQuery.isLoading || deleteTransactions.isPending;
 
-  const deleteAccounts = useBulkDeleteAccounts();
-
-  const isDisabled = accountsQuery.isLoading || deleteAccounts.isPending;
-
-  if (accountsQuery.isLoading) {
+  if (transactionsQuery.isLoading) {
     return (
       <div className="max-w-screen-2xl mx-auto w-full pb-10 -mt-24">
         <Card className="border-none drop-shadow-sm">
@@ -54,12 +53,12 @@ const TransactionsPage = () => {
         </CardHeader>
         <CardContent>
           <DataTable
-            data={accounts}
+            data={transactions}
             columns={columns}
-            filterKey="name"
+            filterKey="amount"
             onDelete={(rows) => {
               const ids = rows.map((row) => row.original.id);
-              deleteAccounts.mutate({ ids });
+              deleteTransactions.mutate({ ids });
             }}
             disabled={isDisabled}
           />
