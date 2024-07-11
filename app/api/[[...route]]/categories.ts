@@ -90,8 +90,6 @@ const app = new Hono()
         .values({ id: createId(), name: values.name, userId: auth?.userId })
         .returning();
 
-      console.log({ data });
-
       return c.json({ data });
     }
   )
